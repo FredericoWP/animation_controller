@@ -2,9 +2,7 @@ import 'package:animation_2022_11_19/desafio1/container.dart';
 import 'package:flutter/material.dart';
 
 class DesafioContainer extends StatefulWidget {
-  const DesafioContainer({super.key, required this.title});
-
-  final String title;
+  const DesafioContainer({super.key});
 
   @override
   State<DesafioContainer> createState() => _DesafioContainerState();
@@ -38,7 +36,14 @@ class _DesafioContainerState extends State<DesafioContainer>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Container Animado"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed('/d02');
+              },
+              icon: const Icon(Icons.change_circle))
+        ],
       ),
       body: SafeArea(
         child: ContainerAnimation(

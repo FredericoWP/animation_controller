@@ -1,4 +1,5 @@
 import 'package:animation_2022_11_19/desafio1/desafio.dart';
+import 'package:animation_2022_11_19/desafio2/expansive_container.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,11 +12,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DesafioContainer(title: 'Container Animado'),
+      initialRoute: "/d02",
+      routes: {
+        "/d01": (context) => const DesafioContainer(),
+        "/d02": (context) => const ExpansiveContainer(),
+      },
     );
   }
 }
