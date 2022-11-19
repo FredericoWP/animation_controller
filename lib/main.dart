@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Animações Controladas',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "/d02",
+      initialRoute: "/d01",
       routes: {
         "/d01": (context) => const DesafioContainer(),
         "/d02": (context) => const ExpansiveContainer(),

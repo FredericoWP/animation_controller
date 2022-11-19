@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ListExpansiveContainer extends StatefulWidget {
@@ -12,6 +14,10 @@ class _ListExpansiveContainerState extends State<ListExpansiveContainer>
     with SingleTickerProviderStateMixin {
   late AnimationController controllerAnimation;
   late Animation<double> sizeContainerAnimation;
+  late Animation<double> rotationAnimation;
+  late Animation<Color?> colorAnimation;
+  late Animation<Color?> textColorAnimation;
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +35,19 @@ class _ListExpansiveContainerState extends State<ListExpansiveContainer>
         curve: Curves.ease,
       ),
     );
+
+    rotationAnimation = Tween<double>(begin: 0.0, end: pi / 2).animate(
+      CurvedAnimation(
+        parent: controllerAnimation,
+        curve: Curves.linear,
+      ),
+    );
+
+    colorAnimation = ColorTween(begin: Colors.white, end: Colors.green)
+        .animate(controllerAnimation);
+
+    textColorAnimation = ColorTween(begin: Colors.grey, end: Colors.white)
+        .animate(controllerAnimation);
   }
 
   void _animation() {
@@ -45,14 +64,24 @@ class _ListExpansiveContainerState extends State<ListExpansiveContainer>
       children: [
         ListTile(
           onTap: () => _animation(),
+          textColor: textColorAnimation.value,
+          iconColor: textColorAnimation.value,
+          tileColor: colorAnimation.value,
           title: Text(
               "Container ${widget.index < 10 ? '0${widget.index}' : widget.index}"),
+          trailing: Transform.rotate(
+            angle: rotationAnimation.value,
+            child: const Icon(
+              Icons.arrow_drop_down,
+            ),
+          ),
         ),
         ClipRRect(
           child: Align(
             heightFactor: sizeContainerAnimation.value,
             alignment: Alignment.topCenter,
-            child: SizedBox(
+            child: Container(
+              padding: const EdgeInsets.all(5),
               child: Column(
                 children: const [
                   FlutterLogo(),

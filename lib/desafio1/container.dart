@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
 class ContainerAnimation extends StatelessWidget {
-  const ContainerAnimation(
-      {super.key,
-      required this.controller,
-      required this.alignmAnimation,
-      required this.borderAnimation,
-      required this.sizeAnimation});
+  const ContainerAnimation({
+    super.key,
+    required this.controller,
+    required this.alignmAnimation,
+    required this.borderAnimation,
+    required this.sizeAnimation,
+    required this.onTap,
+    required this.colorAnimation,
+  });
   final AnimationController controller;
   final Animation<Alignment> alignmAnimation;
   final Animation<double> sizeAnimation;
   final Animation<double> borderAnimation;
+  final Animation<Color?> colorAnimation;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        if (controller.isCompleted) {
-          controller.reverse();
-        } else {
-          controller.forward();
-        }
-      },
+      onTap: () => onTap(),
       child: Align(
         alignment: alignmAnimation.value,
         child: Container(
@@ -29,7 +28,7 @@ class ContainerAnimation extends StatelessWidget {
           height: 50,
           width: sizeAnimation.value,
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: colorAnimation.value,
             borderRadius: BorderRadius.circular(borderAnimation.value),
           ),
         ),

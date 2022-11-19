@@ -14,6 +14,7 @@ class _DesafioContainerState extends State<DesafioContainer>
   late Animation<double> sizeAnimation;
   late Animation<double> borderAnimation;
   late Animation<Alignment> alignmAnimation;
+  late Animation<Color?> colorAnimation;
 
   @override
   void initState() {
@@ -30,12 +31,23 @@ class _DesafioContainerState extends State<DesafioContainer>
     alignmAnimation =
         Tween<Alignment>(begin: Alignment.bottomRight, end: Alignment.topCenter)
             .animate(controller);
+    colorAnimation =
+        ColorTween(begin: Colors.blue, end: Colors.purple).animate(controller);
+  }
+
+  _onTap() {
+    if (controller.isCompleted) {
+      controller.reverse();
+    } else {
+      controller.forward();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: colorAnimation.value,
         title: const Text("Container Animado"),
         actions: [
           IconButton(
@@ -51,6 +63,8 @@ class _DesafioContainerState extends State<DesafioContainer>
           alignmAnimation: alignmAnimation,
           borderAnimation: borderAnimation,
           sizeAnimation: sizeAnimation,
+          onTap: _onTap,
+          colorAnimation: colorAnimation,
         ),
       ),
     );

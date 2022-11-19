@@ -12,6 +12,7 @@ class _ExpansiveContainerState extends State<ExpansiveContainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.green,
           title: const Text("ExpansiveContainer"),
